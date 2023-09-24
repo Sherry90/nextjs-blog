@@ -5,7 +5,7 @@ import FeaturedPosts from "../components/home-page/featured-posts";
 
 const DUMMY_POSTS = [
   {
-    slug: "getting-started-with-nextjs1",
+    slug: "getting-started-with-nextjs",
     title: "Getting Started with NextJS",
     image: "getting-started-nextjs.png",
     excerpt: "NextJS Fullstack course",
