@@ -22,7 +22,7 @@ const PostItem = (props) => {
           <Image
             src={imagePath}
             alt={title}
-            width={300}
+            width={410}
             height={200}
             layout="response"
           />
