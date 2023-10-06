@@ -1,4 +1,8 @@
-const handler = (req, res) => {
+import { MongoClient } from "mongodb";
+
+require("dotenv").config();
+
+const handler = async (req, res) => {
   if (req.method === "POST") {
     const { email, name, message } = req.body;
 
@@ -20,11 +24,38 @@ const handler = (req, res) => {
       message,
     };
 
-    console.log(newMessage);
+    const {
+      DB_USERNAME,
+      DB_PASSWORD,
+      DB_NAME,
+      MESSAGE_COLLECTION,
+    } = process.env;
 
-    res
-      .status(201)
-      .json({ message: newMessage });
+    const connectionString = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.dufywdu.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
+
+    let client;
+
+    try {
+      client = await MongoClient.connect(connectionString);
+    } catch (error) {
+      res.status(500).json({ message: error });
+      return;
+    }
+
+    const db = client.db();
+
+    try {
+      const result = await db.collection(MESSAGE_COLLECTION).insertOne(newMessage);
+      newMessage.id = result.insertedId;
+    } catch (error) {
+      await client.close();
+      res.status(500).json({ message: error });
+      return;
+    }
+
+    await client.close();
+
+    res.status(201).json({ message: newMessage });
   }
 };
 
