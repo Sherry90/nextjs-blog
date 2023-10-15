@@ -19,7 +19,7 @@ const sendContactData = async (contactDetails) => {
   }
 };
 
-const ContactFrom = () => {
+const ContactForm = () => {
   const [enteredEmail, setEnteredEmail] = useState("");
   const [enteredName, setEnteredName] = useState("");
   const [enteredMessage, setEnteredMessage] = useState("");
@@ -131,4 +131,4 @@ const ContactFrom = () => {
   );
 };
 
-export default ContactFrom;
+export default ContactForm;
