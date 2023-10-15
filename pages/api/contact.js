@@ -1,7 +1,5 @@
 import { MongoClient } from "mongodb";
 
-require("dotenv").config();
-
 const handler = async (req, res) => {
   if (req.method === "POST") {
     const { email, name, message } = req.body;
@@ -24,16 +22,9 @@ const handler = async (req, res) => {
       message,
     };
 
-    const {
-      DB_USERNAME,
-      DB_PASSWORD,
-      DB_NAME,
-      MESSAGE_COLLECTION,
-    } = process.env;
-
-    const connectionString = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@cluster0.dufywdu.mongodb.net/${DB_NAME}?retryWrites=true&w=majority`;
-
     let client;
+
+    const connectionString = `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_clustername}.dufywdu.mongodb.net/${process.env.mongodb_database}?retryWrites=true&w=majority`;
 
     try {
       client = await MongoClient.connect(connectionString);
@@ -45,7 +36,7 @@ const handler = async (req, res) => {
     const db = client.db();
 
     try {
-      const result = await db.collection(MESSAGE_COLLECTION).insertOne(newMessage);
+      const result = await db.collection("message").insertOne(newMessage);
       newMessage.id = result.insertedId;
     } catch (error) {
       await client.close();
