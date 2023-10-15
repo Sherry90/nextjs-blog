@@ -1,17 +1,25 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-import classes from "./hero.module.css";
+import classes from './hero.module.css';
 
-const Hero = () => {
+function Hero() {
   return (
     <section className={classes.hero}>
       <div className={classes.image}>
-        <Image src="/images/site/mac.png" alt="" width={680} height={756} />
+        <Image
+          src='/images/site/mac.png'
+          alt='An image showing Mac'
+          width={300}
+          height={300}
+        />
       </div>
-      <h1>Hi, I'm Mac</h1>
-      <p>blog</p>
+      <h1>Hi, I'm Max</h1>
+      <p>
+        I blog about web development - especially frontend frameworks like
+        Angular or React.
+      </p>
     </section>
   );
-};
+}
 
 export default Hero;

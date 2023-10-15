@@ -12,9 +12,12 @@ For example, you should understand code like this:
 
 ```js
 const basics = 'Okay, that should not be too difficult actually';
-(() => {
-  console.log(basics);
-})();
+
+function printBasics() {
+  console.log(basics):
+}
+
+printBasics();
 ```
 
 Learn more about it [here](https://academind.com).

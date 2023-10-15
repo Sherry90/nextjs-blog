@@ -1,18 +1,18 @@
-import { MongoClient } from "mongodb";
+import { MongoClient } from 'mongodb';
 
-const handler = async (req, res) => {
-  if (req.method === "POST") {
+async function handler(req, res) {
+  if (req.method === 'POST') {
     const { email, name, message } = req.body;
 
     if (
       !email ||
-      !email.includes("@") ||
+      !email.includes('@') ||
       !name ||
-      name.trim() === "" ||
+      name.trim() === '' ||
       !message ||
-      message.trim() === ""
+      message.trim() === ''
     ) {
-      res.status(422).json({ message: "Invalid input" });
+      res.status(422).json({ message: 'Invalid input.' });
       return;
     }
 
@@ -36,7 +36,7 @@ const handler = async (req, res) => {
     const db = client.db();
 
     try {
-      const result = await db.collection("message").insertOne(newMessage);
+      const result = await db.collection('messages').insertOne(newMessage);
       newMessage.id = result.insertedId;
     } catch (error) {
       await client.close();
@@ -48,6 +48,6 @@ const handler = async (req, res) => {
 
     res.status(201).json({ message: newMessage });
   }
-};
+}
 
 export default handler;

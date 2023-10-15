@@ -4,7 +4,7 @@
   text-align: center;
 }
 
-.post div {
+.post a {
   color: var(--color-grey-100);
 }
 
